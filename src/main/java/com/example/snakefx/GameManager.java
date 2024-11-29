@@ -27,25 +27,33 @@ public class GameManager {
     snake.draw(gc,moveD);
     }
 
-    public void updateG()
+    public void keyPress()
     {
         if (KeyHandler.up) {
-            moveD = 1;
+            if(moveD !=2)
+                moveD = 1;
 
             KeyHandler.up = false;
         }
         if (KeyHandler.down) {
-            moveD = 2;
+            if(moveD !=1)
+                moveD = 2;
             KeyHandler.down = false;
         }
         if (KeyHandler.right) {
-            moveD = 3;
+            if(moveD !=4)
+                moveD = 3;
             KeyHandler.right = false;
         }
         if (KeyHandler.left) {
-            moveD = 4;
+            if(moveD !=3)
+                moveD = 4;
             KeyHandler.left = false;
         }
+    }
+
+    public void updateG()
+    {
 
         if (moveD != 0)
             move(moveD);

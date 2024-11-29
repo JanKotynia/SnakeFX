@@ -12,10 +12,10 @@ public class GameController {
     private Canvas gameCanvas;
 
     private GraphicsContext gc;
-    private GameManager gm = new GameManager();
-    private AnimationTimer gameLoop;
+    private final GameManager gm = new GameManager();
 
-    private long lastUpdate = 0;
+    private long lastUpdateKG = 0;
+    private long lastUpdateU = 0;
 
     @FXML
     public void initialize() {
@@ -28,22 +28,27 @@ public class GameController {
             }
         });
 
-        gameLoop = new AnimationTimer() {
+        AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (lastUpdate == 0) {
-                    lastUpdate = now;
+                if (lastUpdateKG == 0) {
+                    lastUpdateKG = now;
                     return;
                 }
 
-                double deltaTime = (now - lastUpdate) / 1e9;
-                if (deltaTime >= 1.0 / 20) {
-                    if(!GameManager.GameOver){
-                        gm.updateG();
-                        update(deltaTime);
+                double deltaTimeKeyGraphic = (now - lastUpdateKG) / 1e9;
+                double deltaTimeUpdate = (now - lastUpdateU) / 1e9;
+                if (deltaTimeKeyGraphic >= 1.0 / 24) {
+                    if (!GameManager.GameOver) {
+                        if (deltaTimeUpdate >= 1.0 / 4) {
+                            gm.updateG();
+                            lastUpdateU = now;
+                        }
+                        gm.keyPress();
+                        update(deltaTimeKeyGraphic);
                         render();
-                        lastUpdate = now;}
-                    else
+                        lastUpdateKG = now;
+                    } else
                         gameOver();
 
                 }
@@ -69,7 +74,7 @@ public class GameController {
         gc.setFill(Color.BLACK);
         gc.fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         gc.setStroke(Color.GOLD);
-        gc.setLineWidth(30);
+        gc.setLineWidth(60);
         gc.strokeRect(0, 0, 750, 750);
     }
     private void render() {

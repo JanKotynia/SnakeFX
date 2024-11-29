@@ -18,8 +18,8 @@ public class Food {
         } else {
             img =  new Image(imageStream);
         }
-        int rand1 = new Random().nextInt(23) +2;
-        int rand2 = new Random().nextInt(23) +2;
+        int rand1 = new Random().nextInt(22) +2;
+        int rand2 = new Random().nextInt(22) +2;
         pos_x =rand1 * size;
         pos_y =rand2 * size;
         System.out.println(pos_x + " " + pos_y);
@@ -27,8 +27,8 @@ public class Food {
 
     public void newPosition()
     {
-        int rand1 = new Random().nextInt(23) +2;
-        int rand2 = new Random().nextInt(23) +2;
+        int rand1 = new Random().nextInt(22) +2;
+        int rand2 = new Random().nextInt(22) +2;
         pos_x =rand1 * size;
         pos_y =rand2 * size;
         System.out.println(pos_x + " " + pos_y);
