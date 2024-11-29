@@ -1,14 +1,37 @@
 package com.example.snakefx;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
+
+    private Stage currentStage;
+
+    public void setStage(Stage stage) {
+        this.currentStage = stage;
+    }
 
     @FXML
     protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Game.fxml"));
+            Parent root = fxmlLoader.load();
+
+            Stage newStage = new Stage();
+            Scene scene = new Scene(root, 750, 750);
+            newStage.setScene(scene);
+            newStage.setTitle("New Window");
+            newStage.show();
+
+            currentStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }
