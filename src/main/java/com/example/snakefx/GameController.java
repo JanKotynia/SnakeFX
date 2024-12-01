@@ -68,15 +68,40 @@ public class GameController {
         gc.setFill(Color.RED);
         Font font = new Font("Arial", 40);
         gc.setFont(font);
-        gc.fillText("GAME OVER",320,375);
+        gc.fillText("GAME OVER",400,375);
     }
-    private void fillBackground(){
+    private void fillBackground() {
+
         gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
+        gc.fillRect(0, 0, 900, 750);
+
+
         gc.setStroke(Color.GOLD);
+        gc.setFill(Color.GOLD);
+        gc.fillRect(0, 0, 150, 750);
         gc.setLineWidth(60);
-        gc.strokeRect(0, 0, 750, 750);
+        gc.strokeRect(150, 0, 750, 750);
+
+
+        gc.setFill(Color.BLACK);
+        Font font = new Font("Arial", 20);
+        gc.setFont(font);
+
+        // score
+        String scoreS = String.valueOf(GameManager.score);
+        gc.fillText("Score: " + scoreS, 40, 80);
+        gc.fillRect(38, 85, 85, 5);
+
+        // rotate
+        font = new Font("Arial", 80);
+        gc.setFont(font);
+        gc.save();
+        gc.translate(100, 500);
+        gc.rotate(-90);
+        gc.fillText("SNAKE", 0, 0);
+        gc.restore();
     }
+
     private void render() {
         gc.clearRect(0, 0, gameCanvas.getWidth(), gameCanvas.getHeight());
         fillBackground();

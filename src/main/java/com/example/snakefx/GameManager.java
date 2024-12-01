@@ -10,8 +10,9 @@ public class GameManager {
     Spikes s = new Spikes();
     private final Snake snake = new Snake();
     public ArrayList<PartsOfSnake> sTmp = new ArrayList<>();
-    public static int left_x= 0;
+    public static int left_x= 150;
     public static int top_y = 0;
+    public static Integer score = 0;
 
     public GameManager() {
         for (PartsOfSnake part : snake.sTab) {
@@ -68,6 +69,7 @@ public class GameManager {
             int temp_y = snake.sTab.getLast().pos_y;
 
             f.newPosition();
+            score++;
             do s.newPosition();
             while (s.pos_x == f.pos_x && s.pos_y == f.pos_y);
             PartsOfSnake newbody = new PartsOfSnake(temp_x,temp_y);

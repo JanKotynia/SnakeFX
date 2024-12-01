@@ -23,7 +23,7 @@ public class HelloController {
             Parent root = fxmlLoader.load();
 
             Stage newStage = new Stage();
-            Scene scene = new Scene(root, 750, 750);
+            Scene scene = new Scene(root, 900, 750);
             newStage.setScene(scene);
             newStage.setTitle("New Window");
             newStage.show();
