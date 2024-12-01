@@ -10,7 +10,7 @@ import javafx.scene.text.Font;
 public class GameController {
     @FXML
     private Canvas gameCanvas;
-
+    public static int score=1;
     private GraphicsContext gc;
     private final GameManager gm = new GameManager();
 
@@ -40,7 +40,7 @@ public class GameController {
                 double deltaTimeUpdate = (now - lastUpdateU) / 1e9;
                 if (deltaTimeKeyGraphic >= 1.0 / 24) {
                     if (!GameManager.GameOver) {
-                        if (deltaTimeUpdate >= 1.0 / 4) {
+                        if (deltaTimeUpdate >= 1.0 / (4+(0.2*score))) {
                             gm.updateG();
                             lastUpdateU = now;
                         }

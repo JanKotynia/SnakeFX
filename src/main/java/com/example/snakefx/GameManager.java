@@ -7,6 +7,7 @@ public class GameManager {
     public int moveD = 0;
     public static  boolean GameOver;
     Food f = new Food();
+    Spikes s = new Spikes();
     private final Snake snake = new Snake();
     public ArrayList<PartsOfSnake> sTmp = new ArrayList<>();
     public static int left_x= 0;
@@ -18,12 +19,16 @@ public class GameManager {
         }
         snake.setTail();
         snake.setHead();
+        while (s.pos_x==f.pos_x&&s.pos_y==f.pos_y)
+            s.newPosition();
+
 
     }
 
     public void draw(GraphicsContext gc)
     {
     f.draw(gc);
+    s.draw(gc);
     snake.draw(gc,moveD);
     }
 
@@ -63,10 +68,17 @@ public class GameManager {
             int temp_y = snake.sTab.getLast().pos_y;
 
             f.newPosition();
+            do s.newPosition();
+            while (s.pos_x == f.pos_x && s.pos_y == f.pos_y);
             PartsOfSnake newbody = new PartsOfSnake(temp_x,temp_y);
             snake.sTab.add(newbody);
             sTmp.add(new PartsOfSnake(temp_x, temp_y));
             snake.setTail();
+        }
+
+        if (snake.sTab.getFirst().pos_x == s.pos_x && snake.sTab.getFirst().pos_y == s.pos_y)
+        {
+            GameOver=true;
         }
     }
 

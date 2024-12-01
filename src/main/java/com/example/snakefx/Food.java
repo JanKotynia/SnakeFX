@@ -8,7 +8,8 @@ import java.util.Random;
 public class Food {
     public double pos_x,pos_y;
     public static final int size = 30;
-    private Image img;
+    protected Image img;
+    public final boolean effect = true;
 
     public Food()
     {
@@ -32,12 +33,13 @@ public class Food {
         pos_x =rand1 * size;
         pos_y =rand2 * size;
         System.out.println(pos_x + " " + pos_y);
+        GameController.score++;
 
     }
     public void draw(GraphicsContext g2)
     {
         if (img != null) {
-            g2.drawImage(img,pos_x,pos_y);
+            g2.drawImage(img,pos_x,pos_y,size,size);
         }
     }
 
